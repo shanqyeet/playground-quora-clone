@@ -1,0 +1,43 @@
+body {
+  background: url(../img/quora_background.png) no-repeat center center fixed;
+  background-size: cover;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  position: fixed;
+}
+
+.page_container {
+  position: relative;
+  display: flex;
+  margin: auto;
+  background-color: white;
+  width: 650px;
+  padding-top: 25px;
+  top: 10%;
+  border: 1px solid #e2e2e2;
+  box-shadow: 0 0 5px #888;
+  border-radius: 4px;
+  align-content: center;
+}
+
+.title_container {
+  display: flex;
+  align-content:space-around;
+  flex-direction: column;
+  padding: 0 90px;
+}w
+
+.quora_title_logo {
+  display: flex;
+  width:224px;
+  margin:auto;
+}
+
+.tag_line {
+  width: 475px;
+  font-size: 19px;
+  font-weight: 400;
+  color: #999;
+  text-align: center;
+}

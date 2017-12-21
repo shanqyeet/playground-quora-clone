@@ -1,0 +1,35 @@
+<% if logged_in? %>
+<div class="new_question_page_container">
+  <section>
+    <div class="question_title_container">
+      <img src="/img/quora_logo.png" alt="quora logo">
+    </div>
+  </section>
+  <section>
+    <div class="question_form_container">
+      <div class="question_form_reminder">
+        <h1>Ask away and get answered!</h1>
+        <p>How to quickly get a good answer</p>
+        <ul>
+          <li>Keep your question short and to the point</li>
+          <li>Check for grammar or spelling errors</li>
+          <li>Phrase it like a question</li>
+        </ul>
+      </div>
+      <div class="question_form_box">
+        <p>Hi <%=current_user.name%>,</p>
+        <form id="question_form" action="/questions" method="post">
+          <h1>Start your quetions with "What", "How" or "Why", etc</h1>
+          <p> Question title </p>
+          <input id="question_title_box" type="text" name="title" placeholder="Write your question title">
+          <p> Elaborate your question </p>
+          <input id="question_description_box" type="text" name="description" placeholder="Let others understand your question better"></br>
+          <input id="question_form_submit_button" type="submit" value="Add Question">
+        </form>
+      </div>
+    </div>
+  </section>
+</div>
+<% else %>
+<% redirect '/' %>
+<% end %>

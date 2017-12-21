@@ -1,3 +1,4 @@
+<% if logged_in? %>
 <nav class="nav_bar_container">
   <section class="nav_bar_content_box">
     <div><img id="nav_bar_quora_logo" src="/img/quora_logo.png" alt="nav bar quora logo"></div>
@@ -38,35 +39,29 @@
     </div>
   </section>
 </nav>
-<div class="page_content_container">
-  <section class="profile_container">
-      <div id="profile_details">
-        <div id="profile_box1">
-          <p>Add Photo</p>
-        </div>
-        <div id="profile_box2">
-          <p><%= @user.name %></p>
-        </div>
+<div class="hidden_div"></div>
+<seciton class="question_edit_container">
+  <div class="question_edit_title">
+    <h1>Update your question</h1>
+  </div>
+  <div class="question_edit_form_container">
+    <% @edit = Question.find(params[:id]) %>
+    <div>
+      <div id="edit_form_question_title">
+        <p>Q: <%=@edit.title%></p>
       </div>
-      <div id="profile_content">
-        <aside>
-          <p>side bar</p>
-        </aside>
-        <% @answers = Answer.where(user_id: @user.id)%>
-        <% @answers.each do |a| %>
-        <div class="profile_answer_display">
-          <% @question = Question.find(a.question_id) %>
-          <p><%= @question.title %></p>
-          <p><%= a.answer %></p>
-          <% if current_user.id = @user.id %>
-          <div><a id="answer_edit_button" href="/answers/<%=a.id%>/edit">Edit</a>
-          <div><a id="answer_delete_button" href="/answers/<%=a.id%>/destroy">Delete</a>
-          <%end%>
-        </div>
-        <% end %>
+      <div>
+        <form id="edit_form_box" action="/questions/<%=@edit.id%>" method="post">
+          <p>New question</p>
+          <input id="edit_form_box_question_title" type="text" name="title" placeholder="Modify your question title here" >
+          <p>New description</p>
+          <input id="edit_form_box_question_description" type="textarea" name="description" placeholder="Modify your question description here"></br>
+          <input id="edit_form_submission_button" type="submit" value="Update Question">
+        </form>
       </div>
-  </section>
-  <aside class="side_bar_container">
-      <p> this is side bar </p>
-  </aside>
-</div>
+    </div>
+  </div>
+</section>
+<%else%>
+<%redireict '/'%>
+<%end%>

@@ -1,64 +1,42 @@
-<div class="page_background">
-<div class="page_container">
-  <section class="user_login_container">
-    <div class="title_container">
-      <div><img src="/img/quora_logo.png" class="quora_title_logo"></div>
-      <div><p class="tag_line">A place to share knowledge and better understand the world</p></div>
-    </div>
-      <div class="login_forms_container">
-        <div class="social_login_container">
-          <div class="google_login">
-            <div id="google_login_logo"><img src="/img/google_logo.png" alt="google social login logo" ></div>
-            <div id="google_word"><p >Continue with Google</p></div>
-          </div>
-          <div class="facebook_login">
-            <div id="facebook_login_logo"><img src="/img/facebook_logo.png" alt="facebook social login logo"></div>
-            <div id="facebook_word"><p >Continue with Facebook</p></div>
-          </div>
-          <div class="text_below_social_login">
-            <p>Continue With Email. By signing up you indicate that you have read and agree to the Terms of Service and Privacy Policy.</p>
-          </div>
+<% if logged_in? %>
+<nav class="nav_bar_container">
+  <section class="nav_bar_content_box">
+    <div><img id="nav_bar_quora_logo" src="/img/quora_logo.png" alt="nav bar quora logo"></div>
+    <div id="nav_bar_home_tab">
+      <div>
+        <a href="/home"><img src="/img/menu_icon.png" alt="quora nav bar home tab"></a>
       </div>
-      <div class="sign_up_form_container">
-        <p>Sign Up</p>
-        <form method="post" action="/signup" class="sign_up_form">
-          <p>NAME</p>
-          <input id="name_box" type=text placeholder="Name" name="user[name]"><br>
-          <p>EMAIL</p>
-          <input id="email_box" type=text placeholder="Email" name="user[email]"><br>
-          <p>PASSWORD</p>
-          <input id="password_box" type=password placeholder="Password" name="user[password]"></br>
-          <p id="policy_statement">By clicking "Sign Up" you indicate that you have read and agree to the Terms of Service and Privacy Policy.</p>
-          <input id="signup_button" type=submit value="Sign up">
-          <p id="cancel_signup">Cancel</p>
-        </form>
-      </div>
-      <div class="standard_login_container">
-        <div class="login_form_title"><p>Login</p></div>
-        <form method=post action=/login class="standard_login_form">
-            <input id="email_box" type=text placeholder="Email" name="user[email]"><br>
-            <input id="password_box" type=password placeholder="Password" name="user[password]" style="margin-top: 20px;"></br>
-            <p id="forgot_passwrod">Forgot Password?</p>
-            <input id="login_button" type=submit value="Login">
-        </form>
-        <div class="text_below_standard_login"><p>You are now logged out of this browser, but are still logged in with other browsers. Logout of all browsers.</p></div>
+      <div>
+        <p>Home</p>
       </div>
     </div>
-    <div class="foot_link">
-        <div><p>About</p></div>
-        <div><p>Careers</p></div>
-        <div><p>Businesses</p></div>
-        <div><p>Site Map</p></div>
-        <div><p>Privacy</p></div>
-        <div><p>Terms</p></div>
-        <div><p>Contact</p></div>
-        <div><p>Espanol</p></div>
-        <div><p>Francais</p></div>
-        <div><p>Deutsch</p></div>
-        <div><p>Italiano</p></div>
-        <div><p>Japanese</p></div>
-        <div><p>&#9400 Quora Inc.2017</p></div>
+    <div id="nav_bar_answer_tab">
+      <div>
+        <img src="/img/answer_icon.png" alt="quora nav bar answer tab">
+      </div>
+      <div>
+        <p>Answer</p>
+      </div>
+    </div>
+    <div id="nav_bar_notifications_tab">
+      <div>
+        <img src="/img/notification_icon.png" alt="quora nav bar notification tab">
+      </div>
+      <div>
+        <p>Notifications</p>
+      </div>
+    </div>
+    <div>
+      <form action="/search" method="post" id="search_bar">
+        <input type="text" name="search_bar" value="" placeholder="Search Quora">
+      </form>
+    </div>
+    <div id="nav_bar_profile_tab">
+      <img src="/img/profile_placeholder.png" alt="profile picture tab">
+    </div>
+    <div id="nav_bar_add_question_button">
+      <p>Add Question</p>
     </div>
   </section>
-</div>
-</div>
+</nav>
+<div class="hidden_div"></div>

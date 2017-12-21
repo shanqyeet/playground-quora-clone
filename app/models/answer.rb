@@ -1,5 +1,5 @@
 class Answer < ActiveRecord::Base
 	# This is Sinatra! Remember to create a migration!
   belongs_to :user
-  belogns_to :question
+  belongs_to :question
 end

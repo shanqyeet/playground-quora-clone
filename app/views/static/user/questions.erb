@@ -1,6 +1,81 @@
 <% if logged_in? %>
-
-
+<nav class="nav_bar_container">
+  <section class="nav_bar_content_box">
+    <div><img id="nav_bar_quora_logo" src="/img/quora_logo.png" alt="nav bar quora logo"></div>
+    <div id="nav_bar_home_tab">
+      <div>
+        <a href="/home"><img src="/img/menu_icon.png" alt="quora nav bar home tab"></a>
+      </div>
+      <div>
+        <p>Home</p>
+      </div>
+    </div>
+    <div id="nav_bar_answer_tab">
+      <div>
+        <img src="/img/answer_icon.png" alt="quora nav bar answer tab">
+      </div>
+      <div>
+        <p>Answer</p>
+      </div>
+    </div>
+    <div id="nav_bar_notifications_tab">
+      <div>
+        <img src="/img/notification_icon.png" alt="quora nav bar notification tab">
+      </div>
+      <div>
+        <p>Notifications</p>
+      </div>
+    </div>
+    <div>
+      <form action="/search" method="post" id="search_bar">
+        <input type="text" name="search_bar" value="" placeholder="Search Quora">
+      </form>
+    </div>
+    <div id="nav_bar_profile_tab">
+      <img src="/img/profile_placeholder.png" alt="profile picture tab">
+    </div>
+    <div id="nav_bar_add_question_button">
+      <p>Add Question</p>
+    </div>
+  </section>
+</nav>
+<div class="hidden_div"></div>
+<section class="question_list_container">
+  <div class="question_list_title">
+    <% if current_user.id != @user.id %>
+    <h2>Check out all the questions posted by <%@user.name%> </h2>
+    <% else %>
+    <h2>Check out all the questions posted by you</h2>
+    <%end%>
+  </div>
+    <% if current_user.id != @user.id %>
+      <% all = Question.where(user_id: @user.id) %>
+      <% all.each do |q| %>
+      <article class="question_display_box">
+        <div>
+          <a href="/questions/<%=q.id%>"><p id="question_display_title">Q:<%= q.title %></p></a>
+        </div>
+        <div>
+          <p id="question_display_description"><%= q.description %></p>
+        </div>
+      </arcile>
+      <%end%>
+    <%else%>
+      <% all = Question.where(user_id: current_user.id) %>
+      <% all.each do |q| %>
+      <article class="question_display_box">
+        <div id="question_display_title">
+          <a href="/questions/<%=q.id%>"><p>Q: <%= q.title %></p></a>
+          <a id="edit_button" href="/questions/<%=q.id%>/edit"><p>edit</p></a>
+          <a id="delete_button" href="/questions/<%=q.id%>/destroy"><p>delete</p></a>
+        </div>
+        <div id="question_display_description">
+          <p><%= q.description %></p>
+        </div>
+      </article>
+      <%end%>
+    <%end%>
+</section>
 <% else %>
 <% redirect '/' %>
 <% end %>

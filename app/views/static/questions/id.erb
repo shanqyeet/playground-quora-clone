@@ -1,3 +1,4 @@
+<% if logged_in? %>
 <nav class="nav_bar_container">
   <section class="nav_bar_content_box">
     <div><img id="nav_bar_quora_logo" src="/img/quora_logo.png" alt="nav bar quora logo"></div>
@@ -38,35 +39,23 @@
     </div>
   </section>
 </nav>
-<div class="page_content_container">
-  <section class="profile_container">
-      <div id="profile_details">
-        <div id="profile_box1">
-          <p>Add Photo</p>
-        </div>
-        <div id="profile_box2">
-          <p><%= @user.name %></p>
-        </div>
-      </div>
-      <div id="profile_content">
-        <aside>
-          <p>side bar</p>
-        </aside>
-        <% @answers = Answer.where(user_id: @user.id)%>
-        <% @answers.each do |a| %>
-        <div class="profile_answer_display">
-          <% @question = Question.find(a.question_id) %>
-          <p><%= @question.title %></p>
-          <p><%= a.answer %></p>
-          <% if current_user.id = @user.id %>
-          <div><a id="answer_edit_button" href="/answers/<%=a.id%>/edit">Edit</a>
-          <div><a id="answer_delete_button" href="/answers/<%=a.id%>/destroy">Delete</a>
-          <%end%>
-        </div>
-        <% end %>
-      </div>
-  </section>
-  <aside class="side_bar_container">
-      <p> this is side bar </p>
-  </aside>
-</div>
+<div class="hidden_div"></div>
+<section class="question_id_page_container">
+  <% @question=Question.find(params[:id])%>
+  <div id="question_id_title">
+    <p>Q: <%=@question.title%></p>
+  </div>
+  <div id="question_description">
+    <p><%=@question.description%></p>
+  </div>
+  <div>
+    <form id="answer_submission_form" action="/questions/<%=@question.id%>/answers" method="post">
+      <p id="answer_form_current_user">Answer as: <%=current_user.name%></p>
+      <input id="answer_submission_textarea" type="textarea" name="answer" placeholder="Write your answer">
+      <input id="answer_submission_button" type="submit" value="Submit Answer">
+    </form>
+  </div>
+</section>
+<%else%>
+<%redirect '/'%>
+<%end%>

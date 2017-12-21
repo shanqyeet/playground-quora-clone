@@ -1,3 +1,4 @@
+<% if logged_in? %>
 <nav class="nav_bar_container">
   <section class="nav_bar_content_box">
     <div><img id="nav_bar_quora_logo" src="/img/quora_logo.png" alt="nav bar quora logo"></div>
@@ -38,3 +39,28 @@
     </div>
   </section>
 </nav>
+<div class="hidden_div"></div>
+<seciton class="answer_edit_container">
+  <div class="answer_edit_title">
+    <h1>Update your answer</h1>
+  </div>
+  <div class="answer_edit_form_container">
+    <% @edit = Answer.find(params[:id]) %>
+    <% @question = Question.find(@edit.question_id) %>
+    <div>
+      <div id="edit_form_question_title">
+        <p>Q: <%=@question.title%></p>
+      </div>
+      <div>
+        <form id="answer_edit_form_box" action="/answers/<%=@edit.id%>" method="post">
+          <p>New answer</p>
+          <input id="answer_edit_form_box" type="textarea" name="description" placeholder="Modify your question description here"></br>
+          <input id="answer_edit_form_submission_button" type="submit" value="Update Question">
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+<%else%>
+<%redireict '/'%>
+<%end%>

@@ -1,34 +1,70 @@
 <% if logged_in? %>
-<div class="new_question_page_container">
-  <section>
-    <div class="question_title_container">
-      <img src="/img/quora_logo.png" alt="quora logo">
-    </div>
-  </section>
-  <section>
-    <div class="question_form_container">
-      <div class="question_form_reminder">
-        <h1>Ask away and get answered!</h1>
-        <p>How to quickly get a good answer</p>
-        <ul>
-          <li>Keep your question short and to the point</li>
-          <li>Check for grammar or spelling errors</li>
-          <li>Phrase it like a question</li>
-        </ul>
+  <nav class="nav_bar_container">
+    <section class="nav_bar_content_box">
+      <div><img id="nav_bar_quora_logo" src="/img/quora_logo.png" alt="nav bar quora logo"></div>
+      <div id="nav_bar_home_tab">
+        <div>
+          <a href="/home"><img src="/img/menu_icon.png" alt="quora nav bar home tab"></a>
+        </div>
+        <div>
+          <p>Home</p>
+        </div>
       </div>
-      <div class="question_form_box">
-        <p>Hi <%=current_user.name%>,</p>
-        <form id="question_form" action="/questions" method="post">
-          <h1>Start your quetions with "What", "How" or "Why", etc</h1>
-          <p> Question title </p>
-          <input id="question_title_box" type="text" name="title" placeholder="Write your question title">
-          <p> Elaborate your question </p>
-          <input id="question_description_box" type="text" name="description" placeholder="Let others understand your question better"></br>
-          <input id="question_form_submit_button" type="submit" value="Add Question">
+      <div id="nav_bar_answer_tab">
+        <div>
+          <img src="/img/answer_icon.png" alt="quora nav bar answer tab">
+        </div>
+        <div>
+          <p>Answer</p>
+        </div>
+      </div>
+      <div id="nav_bar_notifications_tab">
+        <div>
+          <img src="/img/notification_icon.png" alt="quora nav bar notification tab">
+        </div>
+        <div>
+          <p>Notifications</p>
+        </div>
+      </div>
+      <div>
+        <form action="/search" method="post" id="search_bar">
+          <input type="text" name="search_bar" value="" placeholder="Search Quora">
         </form>
       </div>
-    </div>
-  </section>
+      <div id="nav_bar_profile_tab">
+        <img src="/img/profile_placeholder.png" alt="profile picture tab">
+      </div>
+      <div id="nav_bar_add_question_button">
+        <p>Add Question</p>
+      </div>
+    </section>
+  </nav>
+  <div class="hidden_div"></div>
+  <div class="new_question_page_container">
+    <section>
+      <div class="question_form_container">
+        <div class="question_form_reminder">
+          <h1>Ask away and get answered!</h1>
+          <p>How to quickly get a good answer</p>
+          <ul>
+            <li>Keep your question short and to the point</li>
+            <li>Check for grammar or spelling errors</li>
+            <li>Phrase it like a question</li>
+          </ul>
+        </div>
+        <div class="question_form_box">
+          <p>Hi <%=current_user.name%>,</p>
+          <form id="question_form" action="/questions" method="post">
+            <h1>Start your quetions with "What", "How" or "Why", etc</h1>
+            <p> Question title </p>
+            <input id="question_title_box" type="text" name="title" placeholder="Write your question title">
+            <p> Elaborate your question </p>
+            <input id="question_description_box" type="text" name="description" placeholder="Let others understand your question better"></br>
+            <input id="question_form_submit_button" type="submit" value="Add Question">
+          </form>
+        </div>
+      </div>
+    </section>
 </div>
 <% else %>
 <% redirect '/' %>

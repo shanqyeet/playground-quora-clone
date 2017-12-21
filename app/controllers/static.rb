@@ -3,7 +3,7 @@ enable :sessions
 
 get '/' do
   p session
-  erb :"static/index"
+  erb :"static/login"
 end
 
 post '/signup' do
@@ -26,7 +26,7 @@ post '/login' do
 end
 
 get '/home' do
-  erb :"static/home"
+  erb :"static/index"
 end
 
 get '/user/:id' do
@@ -35,13 +35,13 @@ get '/user/:id' do
 end
 
 post '/logout' do
-  session.clear
+  sign_out
   rediret '/'
-
 end
 
 get '/user/:id/questions' do
-
+  @user = User.find(params[:id])
+  erb :"static/user/questions"
 end
 
 get '/questions/new' do
@@ -58,83 +58,69 @@ post '/questions' do
 end
 
 get '/questions/:id' do
-
-
+  @question = Question.find(params[:id])
+  erb :'static/questions/id'
 end
 
 get '/questions/:id/edit' do
-
+  @question = Question.find(params[:id])
+  erb :"static/questions/edit"
 end
 
 post '/questions/:id' do
-
+  @question = Question.find(params[:id])
+  @question.title = params[:title]
+  @question.description = params[:description]
+  if @question.save
+    redirect "/user/#{@question.user_id}/questions"
+  else
+    redirect '/questions/:id'
+  end
 end
 
-post '/questions/:id/destory' do
-
+get '/questions/:id/destroy' do
+  @question = Question.find_by(id: params[:id])
+  @question.destroy
+  redirect "/user/#{@question.user_id}/questions"
 end
 
-get '/users/:id/answers' do
-
-end
-
-get '/asnwers/new' do
-
-end
 
 post '/questions/:id/answers' do
-
+  @answer = Answer.new(user_id: current_user.id, question_id: params[:id], answer: params[:answer])
+  if @answer.save
+    redirect "/user/#{current_user.id}"
+  else
+    redirect "questions/#{@answer.question_id}"
+  end
 end
 
 get '/answers/:id/edit' do
-
+  @answer = Answer.find(params[:id])
+  erb :"static/answers/edit"
 end
 
 post '/answers/:id' do
-
+  @answer = Answer.find(params[:id])
+  @answer.answer = params[:answer]
+  if @answer.save
+    redirect "/user/#{@answer.user_id}"
+  else
+    redirect "/answers/#{@answer.id}/edit"
+  end
 end
 
-post '/answers/:id/destroy' do
-
+get '/answers/:id/destroy' do
+  @answer = Answer.find(params[:id])
+  @answer.destroy
+  redirect "/user/#{@answer.user_id}"
 end
 
-# - Day 2
-#     - users can create questions
-#     - create questions table
-#     - home page shows all the questions in descending order of creation date
-#     - Questions
-#         - Suggested routes for questions
-#             - GET '/users/:id/questions' (aka 'index' page)
-#                 - shows a page with all the questions asked by a particular user
-#             - GET '/questions/new' (aka 'new')
-#                 - brings users to a form that allows users to type a question
-#             - POST '/questions' (aka 'create')
-#                 - the action of the 'new' form, handles the actual creation of the question in the database
-#                 - redirects the user to the show page
-#             - GET '/questions/:id' (aka 'show')
-#                 - shows a particular question, including its answers below
-#             - GET '/questions/:id/edit' (aka 'edit')
-#                 - brings users to a form that allows users to edit a particular question
-#                 - (only owner of the question can see this form)
-#             - POST '/questions/:id' (aka 'update)
-#                 - the action of the 'edit' form
-#                 - code in this route will take user's input and updates the right record on the database
-#                 - (only owner can update)
-#                 - redirects the user to the show page to see result.
-#             - POST '/questions/:id/destroy' (aka 'destroy')
-#                 - deletes the question with the right id
-#                 - (only owner can destroy)
+
+
+
 #     - Answers
 #         - Suggested routes:
-#             - GET '/users/:id/answers'
-#                 - shows a page with all the answers made by a user
-#             - GET '/answers/new' NOT NEEDED
-#                 - the answer form can be in the same page as the question 'show' page. No separate page needed for answering a question
-#             - POST '/questions/:id/answers'
-#                 - creates an answer with the right question_id and user_id
-#                 - redirects the user to the question's show page
-#             - GET '/answers/:id' NOT NEEDED
-#                 - a show page to show a particular answer is not needed
+#
 #             - GET '/answers/:id/edit' (edit)
 #                 - gives an edit form for the *owner of the answer* to be able to edit the answer
 #                 - only owner of the answer can see edit page

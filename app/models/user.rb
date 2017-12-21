@@ -1,5 +1,12 @@
-class User < ActiveRecord::Base[5.0]
+require 'bcrypt'
+class User < ActiveRecord::Base
 	# This is Sinatra! Remember to create a migration!
-  validates :email, presence: true,format: {with: /\D+[@]\D+\.\D+/}, uniqueness: true,
-  validates :password, presence: true, length: {equal_or_greater_than: 8}
+  include BCrypt
+  
+  has_secure_password
+  has_many :question
+  has_many :answer
+  validates :name, presence: true
+  validates :email, presence: true, format: {with: /\D+[@]\D+\.\D+/}, uniqueness: true
+  validates :password, presence: true, length: {minimum: 8}
 end

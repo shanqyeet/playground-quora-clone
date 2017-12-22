@@ -67,6 +67,28 @@
         <div>
           <p><%=q.description%></p>
         </div>
+        <div>
+          <div class="question_voting_buttons">
+            <form id="qustion_upvote" action="/questions/<%=q.id%>/vote" name="upvote" method="post">
+              <input type="hidden" name="vote_counts" value="1">
+              <input id="upvote_button" type="submit" value="Up Vote">
+            </form>
+          </div>
+          <div>
+            <form id="question_downvote" action="/questions/<%=q.id%>/vote" name="upvote" method="post">
+              <input type="hidden" name="vote_counts" value="0">
+              <input id="downvote_button" type="submit" value="Down Vote">
+            </form>
+          </div>
+          <div id="vote_count_box">
+            <% counts = QuestionVote.where(question_id: q.id) %>
+            <% sum = 0 %>
+            <% counts.each do |c| %>
+            <% sum += c.vote_counts.to_i %>
+            <%end%>
+            <%= sum %>
+          </div>
+        </div>
         <% answer = Answer.find_by(question_id: q.id)%>
         <%if answer.nil?%>
         <a href="/questions/<%=q.id%>"><p>Be the first to answer this question</p></a>
@@ -75,6 +97,26 @@
           <% user = User.find(answer.user_id) %>
           <p>last posted answer: by <%=user.name%></p>
           <p><%=answer.answer%></p>
+        </div>
+        <div class="answer_voting_buttons">
+          <form action="/answers/<%=answer.id%>/vote" name="upvote" method="post">
+            <input type="hidden" name="vote_counts" value="1">
+            <input id="upvote_button" type="submit" value="Up Vote">
+          </form>
+        </div>
+        <div>
+          <form action="/answers/<%=answer.id%>/vote" name="upvote" method="post">
+            <input type="hidden" name="vote_counts" value="0">
+            <input id="downvote_button" type="submit" value="Down Vote">
+          </form>
+        </div>
+        <div id="vote_count_box">
+          <% counts = AnswerVote.where(answer_id: answer.id) %>
+          <% sum = 0 %>
+          <% counts.each do |c| %>
+          <% sum += c.vote_counts.to_i %>
+          <%end%>
+          <%= sum %>
         </div>
         <%end%>
       </div>

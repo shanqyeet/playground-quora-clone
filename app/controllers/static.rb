@@ -115,6 +115,29 @@ get '/answers/:id/destroy' do
   redirect "/user/#{@answer.user_id}"
 end
 
+post '/questions/:id/vote' do
+  @vote = QuestionVote.find_by(question_id: params[:id])
+  if @vote.nil?
+    @vote = QuestionVote.create(user_id: current_user.id, question_id: params[:id], vote_counts: params[:vote_counts].to_i)
+  else
+    @vote.vote_counts = params[:vote_counts].to_i
+    @vote.save
+    {vote_counts: @vote.vote_counts}.to_json
+  end
+  redirect back
+end
+
+post '/answers/:id/vote' do
+  @vote = AnswerVote.find_by(answer_id: params[:id])
+  if @vote.nil?
+    @vote = AnswerVote.create(user_id: current_user.id, answer_id: params[:id], vote_counts: params[:vote_counts].to_i)
+  else
+    @vote.vote_counts = params[:vote_counts].to_i
+    @vote.save
+  end
+  redirect back
+end
+
 
 
 

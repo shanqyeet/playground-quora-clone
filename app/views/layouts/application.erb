@@ -1,8 +1,23 @@
 <html>
 	<head>
-		<title>Sinatra Framework</title>
+		<meta charset="utf-8">
+		<link rel="shortcut icon" href="/img/quora_favicon.png">
+		<title>Quora - A place to share knowledge and better understand the world</title>
+		<link rel="stylesheet" href="/css/index.css">
+		<link rel="stylesheet" href="/css/application.css">
+		<link rel="stylesheet" href="/css/users/user_home.css">
+		<link rel="stylesheet" href="/css/questions/new.css">
+		<link rel="stylesheet" href="/css/users/user_questions.css">
+		<link rel="stylesheet" href="/css/questions/edit.css">
+		<link rel="stylesheet" href="/css/answers/edit.css">
+		<link rel="stylesheet" href="/css/questions/id.css">
 	</head>
 	<body>
 		<%= yield %>
+		<script
+		  src="https://code.jquery.com/jquery-3.2.1.js"
+		  integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
+		  crossorigin="anonymous"></script>
+		<script src="/js/application.js"></script>
 	</body>
 </html>

@@ -1,0 +1,72 @@
+<nav class="nav_bar_container">
+  <section class="nav_bar_content_box">
+    <div><img id="nav_bar_quora_logo" src="/img/quora_logo.png" alt="nav bar quora logo"></div>
+    <div id="nav_bar_home_tab">
+      <div>
+        <a href="/home"><img src="/img/menu_icon.png" alt="quora nav bar home tab"></a>
+      </div>
+      <div>
+        <p>Home</p>
+      </div>
+    </div>
+    <div id="nav_bar_answer_tab">
+      <div>
+        <img src="/img/answer_icon.png" alt="quora nav bar answer tab">
+      </div>
+      <div>
+        <p>Answer</p>
+      </div>
+    </div>
+    <div id="nav_bar_notifications_tab">
+      <div>
+        <img src="/img/notification_icon.png" alt="quora nav bar notification tab">
+      </div>
+      <div>
+        <p>Notifications</p>
+      </div>
+    </div>
+    <div>
+      <form action="/search" method="post" id="search_bar">
+        <input type="text" name="search_bar" value="" placeholder="Search Quora">
+      </form>
+    </div>
+    <div id="nav_bar_profile_tab">
+      <img src="/img/profile_placeholder.png" alt="profile picture tab">
+    </div>
+    <div id="nav_bar_add_question_button">
+      <p>Add Question</p>
+    </div>
+  </section>
+</nav>
+<div class="page_content_container">
+  <section class="profile_container">
+      <div id="profile_details">
+        <div id="profile_box1">
+          <p>Add Photo</p>
+        </div>
+        <div id="profile_box2">
+          <p><%= @user.name %></p>
+        </div>
+      </div>
+      <div id="profile_content">
+        <aside>
+          <p>side bar</p>
+        </aside>
+        <% @answers = Answer.where(user_id: @user.id)%>
+        <% @answers.each do |a| %>
+        <div class="profile_answer_display">
+          <% @question = Question.find(a.question_id) %>
+          <p><%= @question.title %></p>
+          <p><%= a.answer %></p>
+          <% if current_user.id = @user.id %>
+          <div><a id="answer_edit_button" href="/answers/<%=a.id%>/edit">Edit</a>
+          <div><a id="answer_delete_button" href="/answers/<%=a.id%>/destroy">Delete</a>
+          <%end%>
+        </div>
+        <% end %>
+      </div>
+  </section>
+  <aside class="side_bar_container">
+      <p> this is side bar </p>
+  </aside>
+</div>

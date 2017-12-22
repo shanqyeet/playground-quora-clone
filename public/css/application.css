@@ -1,0 +1,260 @@
+body {
+  margin: 0;
+}
+
+.page_background {
+  background: url(../img/quora_background.png) no-repeat center center fixed;
+  background-size: cover;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+}
+
+.page_container {
+  position: relative;
+  display: flex;
+  margin: auto;
+  background-color: white;
+  width: 900px;
+  padding-top: 25px;
+  top: 10%;
+  border: 1px solid #e2e2e2;
+  box-shadow: 0 0 5px #888;
+  border-radius: 4px;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.title_container {
+  display: flex;
+  flex-direction: column;
+  justify-content:space-around;
+  padding: 0 5%;
+  margin-top: 20px;
+}
+
+.quora_title_logo {
+  display: flex;
+  width:300px;
+  margin:auto;
+}
+
+.tag_line {
+  margin: 10px auto;
+  width: 475px;
+  font-size: 19px;
+  font-weight: 400;
+  color: #999;
+  text-align: center;
+}
+
+.login_forms_container {
+  justify-content: center;
+  flex-direction: row;
+  display: flex;
+  padding: 0 5%;
+  margin-top: 20px;
+  margin-bottom: 20px
+}
+
+.social_login_container {
+  width: 50%;
+  display: none;
+  flex-flow: column;
+  justify-content: center;
+  border-right: solid 1.5px #ececec;
+}
+
+.google_login {
+ width: 90%;
+ height: 40px;
+ background-color: #db3236;
+ color: white;
+ border-radius: 5px;
+ margin: -35px 10px 20px 10px;
+ text-align: center;
+ font-size: 15px;
+ font-family: sans-serif;
+ background-size:contain;
+}
+
+#google_login_logo {
+  position: relative;
+  margin: 5px 8px;
+  float: left;
+}
+
+#google_login_logo img {
+  width: 30px;
+  height: 30px;
+}
+
+#google_word {
+  float: right;
+  position: relative;
+  height: inherit;
+  margin-right: 30%;
+  margin-bottom: 15px;
+  margin-top: -3px;
+}
+
+
+.facebook_login {
+  width: 90%;
+  height: 40px;
+  background-color: #3B5998;
+  color: white;
+  border-radius: 5px;
+  margin: 0 10px;
+  text-align: center;
+  font-size: 15px;
+  font-family: sans-serif;
+}
+
+
+#facebook_login_logo {
+  position: relative;
+  margin: 5px;
+  float: left;
+}
+
+#facebook_login_logo img{
+  width: 30px;
+  height: 30px;
+}
+
+
+#facebook_word {
+  float: right;
+  position: relative;
+  height: inherit;
+  margin-right: 28%;
+  margin-bottom: 15px;
+  margin-top: -3px;
+}
+
+.text_below_social_login {
+  width: 90%;
+  text-align: left;
+  margin-left: 10px;
+  font-size: 15px;
+  color: grey;
+}
+
+.sign_up_form_container {
+  width: 50%;
+  display: flex;
+  flex-flow: column;
+  padding-left: 30px;
+  padding-top: 20px;
+  border-right: 1.5px solid #ececec;
+}
+
+.sign_up_form {
+  width: 90%;
+}
+
+.sign_up_form p {
+  margin-right: 25px;
+  font-family: sans-serif;
+  color: grey;
+}
+
+#policy_statement {
+  font-size: 13px;
+  width: 90%;
+}
+
+#signup_button {
+float: right;
+height: 40px;
+margin-top: 10px;
+background-color: #6ca4c8;
+font-size: 20px;
+margin-right: 28px;
+color: white;
+}
+
+#cancel_signup {
+  float: right;
+}
+
+.standard_login_container {
+  width: 50%;
+  display: flex;
+  flex-flow: column;
+}
+
+.login_form_title {
+  margin-left: 25px;
+}
+
+.standard_login_form {
+  margin-left: 25px;
+  margin-top: -8px;
+}
+
+#name_box {
+  width: 90%;
+  height: 40px;
+  border-radius: 5px;
+  font-size: 20px;
+  padding-left: 10px;
+  background-color: #ececec;
+}
+
+#email_box {
+  width: 90%;
+  height: 40px;
+  border-radius: 5px;
+  font-size: 20px;
+  padding-left: 10px;
+  background-color: #ececec;
+}
+
+#password_box {
+  width: 90%;
+  height: 40px;
+  border-radius: 5px;
+  font-size: 20px;
+  padding-left: 10px;
+  background-color: #ececec;
+}
+#forgot_passwrod {
+  float: left;
+  margin-top: 10px;
+  color: grey;
+}
+#login_button {
+  float: right;
+  height: 40px;
+  margin-top: 10px;
+  background-color: #6ca4c8;
+  color: white;
+  font-size: 20px;
+  margin-right: 28px;
+}
+
+.text_below_standard_login {
+  width: 90%;
+  margin-top: -10px;
+  margin-left: 25px;
+  clear: both;
+  font-size: 15px;
+  color: grey;
+}
+
+.foot_link {
+  background-color: #ececec;
+  font-size: 18px;
+  display: flex;
+  flex-flow: row;
+  justify-content: center;
+  padding: 10px 50px;
+  flex-wrap: wrap;
+}
+
+.foot_link div {
+  margin: -15 10px -15px 10px;
+  color: grey;
+}

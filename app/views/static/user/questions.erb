@@ -40,51 +40,42 @@
   </section>
 </nav>
 <div class="hidden_div"></div>
-<section class="index_content_page_container">
-  <div class="index_content_box">
-    <aside class="index_left_sidebar">
-      <p>this is left side</p>
-    </aside>
-    <div class="index_middle_container">
-      <div class="index_name_display_box">
-        <div>
-          <p><%=current_user.name%></p>
-        </div>
-        <div>
-          <h2>What is your question?</h2>
-        </div>
-      </div>
-      <% all = Question.order(updated_at: :desc) %>
-      <% all.each do |q| %>
-      <div class="index_question_display_box">
-        <% user = User.find(q.user_id) %>
-        <div>
-          <div>
-            <a href="/questions/<%=q.id%>"><p>Q: <%=q.title%></p></a>
-          </div>
-          <p>Posted by: <%=user.name%></p>
-        </div>
-        <div>
-          <p><%=q.description%></p>
-        </div>
-        <% answer = Answer.find_by(question_id: q.id)%>
-        <%if answer.nil?%>
-        <a href="/questions/<%=q.id%>"><p>Be the first to answer this question</p></a>
-        <%else%>
-        <div>
-          <% user = User.find(answer.user_id) %>
-          <p>last posted answer: by <%=user.name%></p>
-          <p><%=answer.answer%></p>
-        </div>
-        <%end%>
-      </div>
-      <%end%>
-    </div>
-    <aside class="index_right_sidebar">
-      <p>this is right side</p>
-    </aside>
+<section class="question_list_container">
+  <div class="question_list_title">
+    <% if current_user.id != @user.id %>
+    <h2>Check out all the questions posted by <%@user.name%> </h2>
+    <% else %>
+    <h2>Check out all the questions posted by you</h2>
+    <%end%>
   </div>
+    <% if current_user.id != @user.id %>
+      <% all = Question.where(user_id: @user.id) %>
+      <% all.each do |q| %>
+      <article class="question_display_box">
+        <div>
+          <a href="/questions/<%=q.id%>"><p id="question_display_title">Q:<%= q.title %></p></a>
+        </div>
+        <div>
+          <p id="question_display_description"><%= q.description %></p>
+        </div>
+      </arcile>
+      <%end%>
+    <%else%>
+      <% all = Question.where(user_id: current_user.id) %>
+      <% all.each do |q| %>
+      <article class="question_display_box">
+        <div id="question_display_title">
+          <a href="/questions/<%=q.id%>"><p>Q: <%= q.title %></p></a>
+          <a id="edit_button" href="/questions/<%=q.id%>/edit"><p>edit</p></a>
+          <a id="delete_button" href="/questions/<%=q.id%>/destroy"><p>delete</p></a>
+        </div>
+        <div id="question_display_description">
+          <p><%= q.description %></p>
+        </div>
+      </article>
+      <%end%>
+    <%end%>
 </section>
-<%else%>
-<%redireict '/'%>
-<%end%>
+<% else %>
+<% redirect '/' %>
+<% end %>

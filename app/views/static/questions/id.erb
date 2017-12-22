@@ -1,0 +1,61 @@
+<% if logged_in? %>
+<nav class="nav_bar_container">
+  <section class="nav_bar_content_box">
+    <div><img id="nav_bar_quora_logo" src="/img/quora_logo.png" alt="nav bar quora logo"></div>
+    <div id="nav_bar_home_tab">
+      <div>
+        <a href="/home"><img src="/img/menu_icon.png" alt="quora nav bar home tab"></a>
+      </div>
+      <div>
+        <p>Home</p>
+      </div>
+    </div>
+    <div id="nav_bar_answer_tab">
+      <div>
+        <img src="/img/answer_icon.png" alt="quora nav bar answer tab">
+      </div>
+      <div>
+        <p>Answer</p>
+      </div>
+    </div>
+    <div id="nav_bar_notifications_tab">
+      <div>
+        <img src="/img/notification_icon.png" alt="quora nav bar notification tab">
+      </div>
+      <div>
+        <p>Notifications</p>
+      </div>
+    </div>
+    <div>
+      <form action="/search" method="post" id="search_bar">
+        <input type="text" name="search_bar" value="" placeholder="Search Quora">
+      </form>
+    </div>
+    <div id="nav_bar_profile_tab">
+      <img src="/img/profile_placeholder.png" alt="profile picture tab">
+    </div>
+    <div id="nav_bar_add_question_button">
+      <p>Add Question</p>
+    </div>
+  </section>
+</nav>
+<div class="hidden_div"></div>
+<section class="question_id_page_container">
+  <% @question=Question.find(params[:id])%>
+  <div id="question_id_title">
+    <p>Q: <%=@question.title%></p>
+  </div>
+  <div id="question_description">
+    <p><%=@question.description%></p>
+  </div>
+  <div>
+    <form id="answer_submission_form" action="/questions/<%=@question.id%>/answers" method="post">
+      <p id="answer_form_current_user">Answer as: <%=current_user.name%></p>
+      <input id="answer_submission_textarea" type="textarea" name="answer" placeholder="Write your answer">
+      <input id="answer_submission_button" type="submit" value="Submit Answer">
+    </form>
+  </div>
+</section>
+<%else%>
+<%redirect '/'%>
+<%end%>

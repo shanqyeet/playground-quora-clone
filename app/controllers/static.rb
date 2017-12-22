@@ -36,7 +36,7 @@ end
 
 post '/logout' do
   sign_out
-  rediret '/'
+  redirect '/'
 end
 
 get '/user/:id/questions' do

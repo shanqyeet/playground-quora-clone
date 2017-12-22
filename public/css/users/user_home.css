@@ -111,8 +111,10 @@
 }
 
 .hidden_div {
-  width: 100%;
   height: 100px;
+  display: flex;
+  flex: 1 1 100%;
+
 }
 .page_content_container {
   display: flex;
